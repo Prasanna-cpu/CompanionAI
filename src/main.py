@@ -3,7 +3,7 @@ import os
 
 app = FastAPI()
 
-env = os.environ["ENV"]
+env = os.environ["ENVIRONMENT"]
 debug = os.environ["DEBUG"]
 
 if not env:
