@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8080 --reload
+    volumes:
+      - ./src:/app/src
+    environment:
+        - ENV=development
+        - DEBUG=True
+    develop:
+      watch:
+        - action: rebuild
+          path: requirements.txt
+        - action: rebuild
+          path: Dockerfile
+        - action: sync
+          path: src
+          target: /app
+
+    env_file:
+      - .env
+
+
+
